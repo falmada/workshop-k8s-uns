@@ -20,13 +20,13 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 
 ## Contenido
 
-### 01 - Contenedores
+### [01 - Contenedores](contenido/01-contenedores.md)
 
 - Instalación de los componentes necesarios para utilizar Docker
 - Pull y Push de una imagen
 - Container Registry/Docker Registry
 
-### 02 - Imagenes de contenedores
+### [02 - Imagenes de contenedores](contenido/02-imagenes.md)
 
 - Crear una imagen a partir de una aplicación propia
 - Tagging de imágenes
@@ -34,7 +34,7 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 - Correr varias instancias de la misma imagen
 - Balanceando tráfico a las imágenes
 
-### 03 - Kubernetes
+### [03 - Kubernetes](contenido/03-kubernetes.md)
 
 - Instalación de Kubernetes en local
 - Primera prueba de pod
@@ -42,13 +42,13 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 - Exponer y probar nuestra aplicación
 - Controladores
 
-### 04 - Preparando nuestra app para el mundo real
+### [04 - Preparando nuestra app para el mundo real](contenido/04-hola-mundo-real.md)
 
 - Multiple replicas
 - Balanceo por medio de servicio
 - Ingress
 
-### 05 - Buenas prácticas
+### [05 - Buenas prácticas](contenido/05-buenas-practicas.md)
 
 - Herramientas: checkov, VS Code y sus extensiones, krew
 - Aplicar resources al spec
@@ -59,14 +59,14 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
   - Alpine
 - Readiness, Liveness
   
-### 06 - Monitoreo
+### [06 - Monitoreo](contenido/06-monitoreo.md)
 
 - Prometheus
   - Queries
 - Grafana
   - Dashboards públicos
 
-### 07 - Resolución de problemas
+### [07 - Resolución de problemas](contenido/07-troubleshooting.md)
 
 - Ejemplos de situaciones comunes
   - CrashLoopBackOff
