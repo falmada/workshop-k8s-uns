@@ -75,8 +75,6 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
   - Readiness
   - Terminating
 
-### 08 - Optimizar nuestro deployment
-
 ## Otros recursos
 
 - [kube.academy](https://kube.academy/)
