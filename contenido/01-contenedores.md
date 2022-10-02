@@ -114,6 +114,8 @@ docker push fedek3/workshop-uns:latest
 
 Si visitamos [nuestro repositorio](https://hub.docker.com/repositories), deberíamos poder ver la nueva imagen lista para consumir.
 
+En nuestro siguiente tema, exploraremos un poco sobre [imagenes de contenedores](02-imagenes.md), como crearlas, probarlas y agregarles tags.
+
 ## Enlaces sugeridos
 
 - [Docker Hub](https://hub.docker.com/search?q=) - Hogar de millones de imagenes para usar en contenedores
