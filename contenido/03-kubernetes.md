@@ -125,7 +125,12 @@ INFO[0104] You can now use it like this:
 kubectl cluster-info
 ```
 
-Lo primero que haremos es ver que pods se han creado
+Lo primero que haremos es ver que pods se han creado.
+
+> ¿Qué es un pod?
+> Es la unidad más pequeña de Kubernetes y representa a uno o más contenedores que comparten almacenamiento y red entre ellos.
+> Un pod modela un *host lógico*, lo cual desde dentro del pod se representa como un host individual.
+> Todos los contenedores dentro de un pod son coubicados, coprogramados y ejecutados en un contexto compartido.
 
 ```sh
 ╰─ kubectl get pods -A
@@ -146,29 +151,81 @@ Tardarán un rato hasta ponerse en Running o Completed, dos de los muchos estado
 
 ## Primera prueba de pod
 
---deployar un nginx pelado y hacer luego portfoward para mostrarlo
+```bash
+# Creamos un pod "mi-pod" usando la imagen de "nginx", un conocido web server
+╰─ kubectl run mi-pod --image=nginx --restart=Never
+pod/mi-pod created
+# Luego procedemos a conectarnos a ella por shell y ejecutar algunos comandos
+╰─ kubectl exec -ti mi-pod -- /bin/bash
+# En este momento estamos dentro del contenedor principal del pod
+root@mi-pod:/# hostname
+mi-pod
+root@mi-pod:/# uptime
+bash: uptime: command not found
+root@mi-pod:/# ps 
+bash: ps: command not found
+# Vemos que el root luce muy parecido a cualquier Linux
+root@mi-pod:/# ls /    
+bin  boot  dev  docker-entrypoint.d  docker-entrypoint.sh  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+# Si revisamos los filesystems montados, vemos algunos detalles interesantes
+root@mi-pod:/# df     
+Filesystem     1K-blocks      Used Available Use% Mounted on
+overlay        244506940 206016964  25996920  89% /
+tmpfs              65536         0     65536   0% /dev
+tmpfs            8011508         0   8011508   0% /sys/fs/cgroup
+/dev/nvme0n1p2 244506940 206016964  25996920  89% /etc/hosts
+shm                65536         0     65536   0% /dev/shm
+tmpfs            1073744        12   1073732   1% /run/secrets/kubernetes.io/serviceaccount
+tmpfs            8011508         0   8011508   0% /proc/acpi
+tmpfs            8011508         0   8011508   0% /proc/scsi
+tmpfs            8011508         0   8011508   0% /sys/firmware
+# Y si buscamos aquellos puntos de montaje con el flag remount-ro, nos damos con otros detalles
+root@mi-pod:/# mount | grep remount-ro
+/dev/nvme0n1p2 on /etc/hosts type ext4 (rw,relatime,errors=remount-ro)
+/dev/nvme0n1p2 on /dev/termination-log type ext4 (rw,relatime,errors=remount-ro)
+/dev/nvme0n1p2 on /etc/hostname type ext4 (rw,relatime,errors=remount-ro)
+/dev/nvme0n1p2 on /etc/resolv.conf type ext4 (rw,relatime,errors=remount-ro)
+root@mi-pod:/# exit
+```
+
+Como verán, una vez dentro del pod, el host se reconoce a si mismo como "mi-pod", igual que el nombre de nuestro pod. Por otro lado, varios comandos fallan, porque en la imagen no fueron incluidos (más adelante explicaremos los motivos). Si corremos un `df`, veremos varias cosas intersantes como que el espacio que refleja el `/` es el mismo que nuestro ordenador, y que cuenta con un `/etc/hosts` montado, que está por encima del archivo real de nuestro host. Si observamos los puntos de montaje, vemos otras cosas que se montan por encima para permitir que el contenedor corra como un host lógico.
+
+El siguiente paso es exponer nuestra aplicación de forma fácil, con un `port-forward`.
+
+```bash
+# Con 8080 especificamos el puerto local, y 80 el puerto del pod al que conectamos
+╰─ kubectl port-forward mi-pod 8080:80
+Forwarding from 127.0.0.1:8080 -> 80
+Forwarding from [::1]:8080 -> 80
+# Una vez probado el acceso via browser, podemos matar el proceso con CTRL+C
+```
+
+Abrimos <http://localhost:8080> en nuestro ordenador y veremos un NGINX funcionando.
 
 ## Nuestra app en un pod!
 
---crear pod con nuestra imagen
+#TODO crear pod con nuestra imagen
+
 ## Exponer y probar nuestra app
 
 
--- exponer por port forward
--- exponer como node port
--- explicar issue de usar nodeport
--- explicar load balancer, clusterip
--- explicar ingress
+#TODO exponer por port forward
+#TODO exponer como node port
+#TODO explicar issue de usar nodeport
+#TODO explicar load balancer, clusterip
+#TODO explicar ingress
 
 ## Controladores
 
--- matar pod, que paso?! AUTO RECOVERY? -> Controladores! spec, template de pods
--- ejemplos de como se comportan, daemonset, sts, replica, deployment
--- replicas
--- matar pods y mostrar con varias replicas asi ven como se nombran
--- agregar resources al deployment, que pasa?
+#TODO matar pod, que paso?! AUTO RECOVERY? -> Controladores! spec, template de pods
+#TODO ejemplos de como se comportan, daemonset, sts, replica, deployment
+#TODO replicas
+#TODO matar pods y mostrar con varias replicas asi ven como se nombran
+#TODO agregar resources al deployment, que pasa?
 
 ## Enlaces sugeridos
 
 - [K3d](https://k3d.io)
 - [Comparación de varias distro livianas de Kubernetes](https://www.linkedin.com/pulse/run-kubernetes-locally-minikube-microk8s-k3s-k3d-kind-sangode/?trk=portfolio_article-card_title)
+- [Pods](https://kubernetes.io/es/docs/concepts/workloads/pods/pod/)
+- [Controladores](https://kubernetes.io/es/docs/concepts/workloads/controllers/)
