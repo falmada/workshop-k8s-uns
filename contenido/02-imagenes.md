@@ -123,6 +123,19 @@ my-app                  v0.1.0                  7fbe18f0b4d4   42 minutes ago   
 
 De este modo nos garantizamos que nuestros desarrolladores siempre estén probando la última versión.
 
+## Subiendo nuestra imagen a un registry
+
+```bash
+# Login
+docker login
+# Tagueamos la imagen con el nombre del repo
+docker tag my-app:v0.2.0 fedek3/workshop-uns:v0.2.0
+docker tag my-app:v0.2.0 fedek3/workshop-uns:latest
+# Hacemos push
+docker push fedek3/workshop-uns:v0.2.0
+docker push fedek3/workshop-uns:latest
+```
+
 ## Multiple instancias de la misma imagen
 
 Si quisieramos correr multiples instancias de esta imagen, y sólo disponemos de nuestro entorno local, podemos simplemente generar dos consolas y correr los siguientes comandos
