@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: mi-app
+  labels:
+    app: mi-app
+spec:
+  selector:
+    matchLabels:
+      app: mi-app
+  template:
+    metadata:
+      labels:
+        app: mi-app
+    spec:
+      containers:
+      - image: fedek3/workshop-uns:latest
+        name: mi-pod
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
