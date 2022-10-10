@@ -4,6 +4,7 @@
 - Primera prueba de pod
 - Nuestra app en un pod
 - Exponer y probar nuestra aplicación
+- Formas de exponer servicios
 
 ## Intro
 
