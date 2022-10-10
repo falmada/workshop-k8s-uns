@@ -4,7 +4,6 @@
 - Primera prueba de pod
 - Nuestra app en un pod
 - Exponer y probar nuestra aplicación
-- Controladores
 
 ## Intro
 
@@ -356,6 +355,7 @@ mi-pod       10.42.1.6:80        19m
 ```
 
 Consecuentemente, si revisamos que ip tiene nuestro pod, nos daremos cuenta que el selector está funcionando correctamente.
+
 ```bash
 ╰─ kubectl get pod mi-pod -o wide
 NAME     READY   STATUS    RESTARTS   AGE   IP          NODE                     NOMINATED NODE   READINESS GATES
@@ -366,30 +366,101 @@ mi-pod   1/1     Running   0          21m   10.42.1.6   k3d-mi-cluster-agent-0  
 
 Hagamos nuevamente la prueba de conectarnos al servicio por medio del NodePort visitando <http://localhost:30100/>
 
-Si bien suena mágico que por medio de `NodePort` logremos exponer nuestra aplicación en unas pocas líneas de código, hay que ser realista y pensar en un entorno productivo. Hay muchas limitaciones para el uso de NodePort si nuestra aplicación vive en Internet, ¿acaso alguna vez visitaron google tipeando http://www.google.com:443? imagínense usando en cambio http://www.mi-app.com:30100! Más de uno desconfiaría y directamente ni visitaría nuestra aplicación. Por otro lado, hay un rango de 2768 puertos disponibles por defecto, y cada puerto implica una mayor complejidad en nuestra red para administrarlo (con posibles colisiones).
+Si bien suena mágico que por medio de `NodePort` logremos exponer nuestra aplicación en unas pocas líneas de código, hay que ser realista y pensar en un entorno productivo. Hay muchas limitaciones para el uso de NodePort si nuestra aplicación vive en Internet, ¿acaso alguna vez visitaron google tipeando <http://www.google.com:443>? imagínense usando en cambio <http://www.mi-app.com:30100>! Más de uno desconfiaría y directamente ni visitaría nuestra aplicación. Por otro lado, hay un rango de 2768 puertos disponibles por defecto, y cada puerto implica una mayor complejidad en nuestra red para administrarlo (con posibles colisiones).
 
 > Para laboratorios y/o redes internas, el uso de NodePort es más que suficiente. En Producción, si no tenemos otra alternativa que el uso de NodePort, siempre podemos poner un *Application Load Balancer* enfrente que se haga cargo de exponer un puerto más estándar, aunque debemos considerar las otras limitaciones de los NodePort.
 
 ### Servicios de tipo LoadBalancer
 
-#TODO explicar issue de usar nodeport
-#TODO explicar load balancer, clusterip
-#TODO explicar ingress
+Gracias a la existencia de múltiples proveedores en la nube (AWS, Azure, GCP), hay muchos servicios de Balanceo de Carga disponible (ALB, NLB, ALB+WAF), los cuales son pagos salvo sus versiones más reducidas. Para entornos fuera de la nube, tenemos distintas soluciones de Balanceo de Carga a nuestra disposición, las cuales requieren la presencia de un controlador dentro de Kubernetes para poder hacer uso de ellas por medio de Servicios. La solución más sugerida es [MetalLB](https://metallb.universe.tf/), pero existen [muchos otros disponibles en la actualidad](https://landscape.cncf.io/card-mode?category=service-proxy&project=hosted,no&grouping=category).
 
-## Controladores
+Debido a la complejidad del uso de estos servicios para un entorno de pruebas como K3d, vamos a omitir este paso y saltar directo a Ingress.
 
-#TODO matar pod, que paso?! AUTO RECOVERY? -> Controladores! spec, template de pods
-#TODO ejemplos de como se comportan, daemonset, sts, replica, deployment
-#TODO replicas
-#TODO matar pods y mostrar con varias replicas asi ven como se nombran
-#TODO agregar resources al deployment, que pasa?
+### Objetos de tipo Ingress
+
+La solución más usual para exponer cargas de trabajo en Kubernetes suele terminar siendo un **Ingress Controller**.
+
+En su formato más básico, un usuario ingresa a un dominio (ej: mi-app.com), lo cual está apuntando en algún DNS hacia la IP expuesta a Internet de nuestro Ingress Controller.
+
+Una vez que la conexión llega, si existe un objeto de tipo `Ingress` en dicho controlador, este interpretará su definición para entender, por medio de los `selectors`, a que servicio debe enviarle la conexión entrante. El servicio, por su parte, mantiene una lista de `endpoints` de forma constante, gracias al uso de `selectors` apuntando a los `labels` de los pods objetivos.
+
+En este diagram podemos apreciar los pasos de forma muy simplista.
+
+```mermaid
+graph LR;
+U[Usuario];
+IC[Ingress Controller];
+S[Servicio];
+P1[Pod01];
+P2[Pod02];
+U-- mi-app.com -->IC
+IC-- app=mi-app -->S;
+S-- app=mi-app -->P1;
+S-- app=mi-app -->P2;
+```
+
+Para poder exponer un servicio haciendo uso de un objeto de tipo `Ingress`, necesitamos como mínimo un `Ingress Controller`. Existen muchos en el mercado, del mismo modo que con los controladores de balanceo de carga, y Kubernetes no trae ninguno por defecto instalado. En lo positivo, gracias a las `IngressClass`, podemos hacer uso de más de un controlador de `Ingress` por cluster de Kubernetes, lo cual quita un poco la presión de elegir la "mejor opción disponible" al momento de crear nuestro cluster.
+
+> k3d, al ser una distribución de Kubernetes, viene con algunas decisiones tomadas. En el caso puntual del Ingress Controller, han elegido [traefik](https://doc.traefik.io/traefik/).
+
+Dado que ya contamos con **traefik** en k3d, vamos a simplemente hacer uso del mismo creando un objeto de tipo `Ingress`. Nuevamente, haremos uso de `kubectl create` para ayudarnos en armar un YAML válido que luego podremos visualizar y editar.
+
+```bash
+# Creamos un servicio de tipo clusterIP
+kubectl create service clusterip mi-app-svc --tcp=80 -o yaml --dry-run=client > mi-app-svc.yaml
+# Creamos un ingress apuntando a dicho servicio
+kubectl create ingress mi-app-ingress --rule="mi-app.com/*=mi-app-svc:80" > mi-app-ingress.yaml
+```
+
+Editamos el servicio `mi-app-svc` para que los `selectors` apunten al label correcto, `app=mi-pod` (por defecto estará como `app: mi-app-svc`), y aplicamos ese objeto en el cluster.
+
+``` bash
+# Aplicamos
+kubectl apply -f extras/03-kubernetes/deploy-03/mi-app-svc.yaml
+# Podemos confirmar que encontró los pods
+kubectl get endpoints
+# Ahora creamos el Ingress también
+kubectl apply -f extras/03-kubernetes/deploy-03/mi-app-ingress.yaml
+```
+
+Podemos validar que el Ingress se creo y entender que está pasando en este momento:
+
+```bash
+╰─ kubectl get ingress 
+NAME             CLASS    HOSTS        ADDRESS                                               PORTS   AGE
+mi-app-ingress   <none>   mi-app.com   192.168.48.2,192.168.48.3,192.168.48.4,192.168.48.5   80      3m50s
+```
+
+El objetivo Ingress llamado `mi-app-ingress`, sin clase (!), está escuchando tráfico en el Ingress Controller que tenga un *Request* apuntando a `mi-app.com`. Internamente, dicho ingress está escuchando en un determinado conjunto de direcciones IP, y específicamente en el puerto 80.
+
+Si queremos probar esto, deberemos engañar a nuestro sistema operativo, cambiando la definición de `/etc/hosts`.
+
+```bash
+╰─ sudo vi /etc/hosts
+# Agregar línea con alguno de los IPs del paso previo y el FQDN mi-app.com, ejemplo
+╰─ tail -1 /etc/hosts
+192.168.48.2 mi-app.com
+# Luego hacemos un ping para validar
+╰─ ping -c1 mi-app.com
+PING mi-app.com (192.168.48.2) 56(84) bytes of data.
+64 bytes from mi-app.com (192.168.48.2): icmp_seq=1 ttl=64 time=0.176 ms
+
+--- mi-app.com ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.176/0.176/0.176/0.000 ms
+```
+
+Si en nuestro navegador visitamos <http://mi-app.com>, veremos nuestra aplicación corriendo (de mentira) en un dominio real.
+
+> Dado que editamos nuestro archivo `/etc/hosts` y que k3d sólo escucha localmente por defecto, nadie más debería poder acceder a nuestra aplicación con esta configuración actual.
 
 ## Enlaces sugeridos
 
 - [K3d](https://k3d.io)
 - [Comparación de varias distro livianas de Kubernetes](https://www.linkedin.com/pulse/run-kubernetes-locally-minikube-microk8s-k3s-k3d-kind-sangode/?trk=portfolio_article-card_title)
+- [When mapping too many ports then daemon failed #22614](https://github.com/moby/moby/issues/22614)
 - [Pods](https://kubernetes.io/es/docs/concepts/workloads/pods/pod/)
 - [Controladores](https://kubernetes.io/es/docs/concepts/workloads/controllers/)
 - [Servicios](https://kubernetes.io/es/docs/concepts/services-networking/service/)
 - [Exposing services k3d](https://k3d.io/v5.4.6/usage/exposing_services/)
-- [When mapping too many ports then daemon failed #22614](https://github.com/moby/moby/issues/22614)
+- [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
