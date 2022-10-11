@@ -76,6 +76,7 @@ k3d cluster create "mi-cluster" \
     --servers-memory 256Mi \
     --agents 3 \
     --agents-memory 1Gi \
+    --port "30000-30100:30000-30100@server:0" \
     --registry-create mycluster-registry:0.0.0.0:5432
 ```
 
