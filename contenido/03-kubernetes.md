@@ -210,7 +210,7 @@ Podemos hacerlo del mismo modo que con la imagen de nginx, o podemos ir un poco 
 
 ```bash
 # Con dry-run=client, simulamos una acción, y con -o yaml exportamos la salida a ese formato
-kubectl run mi-pod --image=fedek3/workshop-uns:latest --restart=Never --dry-run=client -o yaml > mi-pod.yaml
+kubectl run mi-pod --image=fedek3/workshop-uns:v0.2.0 --restart=Never --dry-run=client -o yaml > mi-pod.yaml
 # Esto nos genera el archivo: mi-pod.yaml
 ```
 
@@ -241,7 +241,7 @@ metadata:
   name: mi-pod
 spec:
   containers:
-  - image: fedek3/workshop-uns:latest
+  - image: fedek3/workshop-uns:v0.2.0
     name: mi-pod
     resources: {}
   dnsPolicy: ClusterFirst
@@ -271,7 +271,7 @@ En el medio, contamos con el `spec` del objeto, en este caso, de un `pod`:
 ```yaml
 spec:
   containers:
-  - image: fedek3/workshop-uns:latest
+  - image: fedek3/workshop-uns:v0.2.0
     name: mi-pod
     resources: {}
   dnsPolicy: ClusterFirst

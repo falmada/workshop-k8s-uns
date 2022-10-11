@@ -7,7 +7,7 @@ metadata:
   name: mi-pod
 spec:
   containers:
-  - image: fedek3/workshop-uns:latest
+  - image: fedek3/workshop-uns:v0.2.0
     name: mi-pod
     resources: {}
   dnsPolicy: ClusterFirst
