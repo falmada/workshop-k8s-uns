@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mi-app
+  labels:
+    app: mi-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mi-app
+  template:
+    metadata:
+      labels:
+        app: mi-app
+    spec:
+      containers:
+      - image: fedek3/workshop-uns:v0.3.0
+        name: mi-pod
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

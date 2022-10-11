@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mi-deploy
+  name: mi-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mi-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mi-deploy
+    spec:
+      containers:
+      - image: fedek3/workshop-uns:v0.3.0
+        name: workshop-uns
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
