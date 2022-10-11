@@ -2,9 +2,15 @@
 
 ## Intro
 
-La idea de este workshop nace luego de unas charlas que la UNS nos permitió realizar en sus aulas. Con el fin de promover el uso de Kubernetes, y hacer llegar esta tecnología a estudiantes que seguramente se cruzarán con ella en sus próximos años, surge la necesidad de armar un Workshop para explorar distintos contenidos relacionados al tema.
+La idea de este workshop nace luego de unas charlas que la UNS nos invitó a realizar en sus aulas. Con el fin de promover el uso de Kubernetes, y hacer llegar esta tecnología a estudiantes que seguramente se cruzarán con ella en sus próximos años, surge la necesidad de armar un Workshop para explorar distintos contenidos relacionados al tema.
 
 La audiencia de este material es todo aquel que tenga una base de conocimientos sobre contenedores, y quiera empezar a experimentar con Kubernetes en su propia computadora.
+
+## ¿Por qué hacemos este taller?
+
+Queremos acercar Kubernetes a distintos grupos que pueden adoptarlo para su trabajo actual o futuro, e incluso hacer uso de esta tecnología en su propio hogar. Creemos que aquellas tecnologías que son accesibles gracias a proyectos como éste, deben ser aprovechados por la comunidad para expandir su conocimiento, como también entender las distintas opciones que existen hoy en día para desplegar sus aplicaciones y administrar sus cargas de trabajo.
+
+Si de este taller surge al menos una persona interesada en usarlo para su trabajo y/o proyectos personales, hemos logrado nuestro objetivo.
 
 ### Sobre Kubernetes
 
