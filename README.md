@@ -40,13 +40,13 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 - Primera prueba de pod
 - Nuestra app en un pod
 - Exponer y probar nuestra aplicación
+- Formas de exponer servicios
 
 ### [04 - Preparando nuestra app para el mundo real](contenido/04-hola-mundo-real.md)
 
+- Self-healing
 - Controladores
-- Multiple replicas
 - Balanceo por medio de servicio
-- Ingress
 
 ### [05 - Buenas prácticas](contenido/05-buenas-practicas.md)
 
