@@ -53,6 +53,7 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 - Self-healing
 - Controladores
 - Balanceo por medio de servicio
+- Multiples servicios, mismo label
 
 ### [05 - Buenas prácticas](contenido/05-buenas-practicas.md)
 
@@ -80,6 +81,12 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
   - OOMKill
   - Readiness
   - Terminating
+
+### [99 - Preguntas frecuentes](contenido/99-preguntas-frecuentes.md)
+
+- K3d
+- Docker
+- Kubernetes
 
 ## Otros recursos
 
