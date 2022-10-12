@@ -427,9 +427,9 @@ Lo que vemos entonces, es que un Deployment permite hacer una actualización con
 
 Como ya explicamos anteriormente, los servicios apuntan a los pods haciendo uso de `selectors`. Estos, apuntan a `labels` específicos, por ende cualquier pod que cumpla con el criterio/filtro de los `selectors`, será automáticamente asociado a un endpoint del servicio. Dado que un Deployment define un `template` de los Pods a generar, podemos garantizar que cada vez que creemos una replica, este va a tener lo necesario para que el servicio lo incluya en su lista de endpoints.
 
-Usando de base el servicio que creamos en el capítulo anterior, vamos a [crear uno nuevo](mi-../extras/04-hola-mundo-real/deploy-05/mi-deploy-svc.yaml) pero que apunte a nuestros nuevos labels. [Como ya teníamos un ingress](../extras/03-kubernetes/deploy-03/mi-app-ingress.yaml) creado, dejaremos los labels del servicio como están, sólo cambiaremos los `selectors` de éste hacia los pods.
+Usando de base el servicio que creamos en el capítulo anterior, vamos a [crear uno nuevo](mi-../extras/04-hola-mundo-real/deploy-05/mi-deploy-svc.yaml) pero que apunte a nuestros nuevos labels. Creamos un [nuevo ingress](../extras/04-hola-mundo-real/deploy-05/mi-deploy-ingress.yaml) apuntando a este servicio, siguiendo el mismo formato que el anterior ingress creado, sólo que apuntará a los nuevos `labels` por medio de los `selectors`.
 
-Primero desplegamos el nuevo servicio y luego revisamos los endpoints
+Primero desplegamos el nuevo servicio, luego revisamos los endpoints y finalmente aplicamos el nuevo ingress. Como ya teníamos uno antes, lo borramos para que no produzca errores dado que apuntan al mismo host.
 
 ```bash
 ╰─ kubectl apply -f extras/04-hola-mundo-real/deploy-05/mi-deploy-svc.yaml
@@ -440,6 +440,14 @@ mi-app-svc      <none>                                      5h22m
 mi-pod          <none>                                      6h19m
 kubernetes      192.168.48.3:6443                           6h23m
 mi-deploy-svc   10.42.0.10:80,10.42.1.18:80,10.42.2.15:80   25s
+╰─ kubectl apply -f extras/04-hola-mundo-real/deploy-05/mi-deploy-ingress.yaml
+ingress.networking.k8s.io/mi-deploy-ingress created
+╰─ kubectl get ingress
+NAME                CLASS    HOSTS        ADDRESS                                               PORTS   AGE
+mi-app-ingress      <none>   mi-app.com   192.168.48.2,192.168.48.3,192.168.48.4,192.168.48.5   80      29h
+mi-deploy-ingress   <none>   mi-app.com   192.168.48.2,192.168.48.3,192.168.48.4,192.168.48.5   80      4s
+╰─ kubectl delete ingress mi-app-ingress
+ingress.networking.k8s.io "mi-app-ingress" deleted
 ```
 
 Ya vemos que nuestro servicio tiene varios endpoints creados, uno por cada pod que representa una réplica según el `selector`.
@@ -497,13 +505,6 @@ SF-->F2;
 SF-->F3;
 SB-->B;
 ```
-
-## Ingress
-
-#TODO actualizar imagen, agregar hostname, pushearla
-#TODO actualizar deployment a nueva imagen, probar, cambia hostname con f5?
-#TODO mostrar servicio y endpoints
-#TODO replicas = 4 con 3 nodos, como se ubican los pods?
 
 ## Enlaces sugeridos
 
