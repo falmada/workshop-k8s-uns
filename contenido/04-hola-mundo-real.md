@@ -1,9 +1,5 @@
 # 04 - Preparando nuestra app para el mundo real
 
-- Self-healing
-- Controladores
-- Balanceo por medio de servicio
-
 ## Self-healing
 
 Ya tenemos nuestro Pod corriendo, y gracias a Kubernetes, tenemos algo llamado *self-healing*, que según la documentación permite que nuestros pods ¡se recuperen mágicamente cuando mueren!

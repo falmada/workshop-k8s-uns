@@ -1,11 +1,5 @@
 # 03 - Kubernetes
 
-- Instalación de Kubernetes en local
-- Primera prueba de pod
-- Nuestra app en un pod
-- Exponer y probar nuestra aplicación
-- Formas de exponer servicios
-
 ## Intro
 
 Ya tenemos una imagen, pudimos correr un contenedor con ella y ahora queremos llevarla a Kubernetes, ¿cómo seguimos?

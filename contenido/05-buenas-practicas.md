@@ -1,16 +1,5 @@
 # 05 - Buenas prácticas
 
-- Namespaces
-- Kustomization
-- Herramientas
-- Aplicar resources al spec
-- SecurityContext
-- Optimizar imagen
-  - Tamaño
-  - Layers
-  - Alpine
-- Readiness, Liveness
-
 ## Namespaces
 
 > ¿Qué es un namespace? Es una división lógica dentro del mismo cluster que nos permite que múltiples usuarios trabajen sobre el mismo entorno, sin necesariamente interferir con los objetos creados por el otro. Dentro de un namespace, dos objetos del mismo tipo y nombre no podrían convivir, pero en distintos namespaces esto no sería un problema. El uso más usual de namespaces es para dividir el cluster en múltiples proyectos, aunque también se suele usar para dividir los entornos (dev, qa, prod, etc) de un mismo proyecto, o combinaciones a necesidad de los usuarios.
