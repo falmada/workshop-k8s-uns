@@ -57,7 +57,9 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 
 ### [05 - Buenas prácticas](contenido/05-buenas-practicas.md)
 
-- Herramientas: checkov, VS Code y sus extensiones, krew
+- Namespaces
+- Kustomization
+- Herramientas
 - Aplicar resources al spec
 - SecurityContext
 - Optimizar imagen

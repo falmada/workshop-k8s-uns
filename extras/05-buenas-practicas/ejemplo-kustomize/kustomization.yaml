@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Especificar namespace a usar
+namespace: mi-app-kustomize
+
+# Recursos que se deberían aplicar, el orden importa
+resources:
+- namespace.yaml
+- mi-deploy-ingress.yaml
+- mi-deploy-svc.yaml
+- mi-deploy.yaml
