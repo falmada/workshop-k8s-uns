@@ -15,4 +15,3 @@
 - Describir un pod: `kubectl describe pod-name`
 - Obtener logs de un pod: `kubectl logs pod-name`
 - Conectarse a un pod con shell: `kubectl exec -ti pod-name -- /bin/sh` (asume que imagen contiene /bin/sh)
-

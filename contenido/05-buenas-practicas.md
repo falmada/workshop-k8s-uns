@@ -67,10 +67,9 @@ La idea no es hacer una revisión exhaustiva de herramientas, sino mostrarles al
 
 //TODO
 
-##  Optimizar imagen
+## Optimizar imagen
 
 //TODO
-
 
 ### Tamaño
 
@@ -84,7 +83,7 @@ La idea no es hacer una revisión exhaustiva de herramientas, sino mostrarles al
 
 //TODO
 
-##  Readiness, Liveness
+## Readiness, Liveness
 
 //TODO
 
