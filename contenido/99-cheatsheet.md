@@ -1,4 +1,4 @@
-# 99 - Preguntas Frecuentes
+# 99 - Cheatsheet
 
 ## k3d
 

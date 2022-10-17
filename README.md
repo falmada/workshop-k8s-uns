@@ -84,7 +84,7 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
   - Readiness
   - Terminating
 
-### [99 - Preguntas frecuentes](contenido/99-preguntas-frecuentes.md)
+### [99 - Cheatsheet](contenido/99-cheatsheet.md)
 
 - K3d
 - Docker
