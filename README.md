@@ -79,6 +79,7 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 
 - Ejemplos de situaciones comunes
   - CrashLoopBackOff
+  - ImagePullBackOff
   - Pending
   - OOMKill
   - Readiness
