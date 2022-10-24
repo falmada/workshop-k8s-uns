@@ -233,6 +233,8 @@ De no fijar un `livenessProbe`, estamos a la suerte de que alguien se de cuenta 
 
 Finalmente, el *readinessProbe* sirve para saber cuando un contenedor está listo para aceptar tráfico. Dado que los servicios de Kubernetes hacen uso de *endpoints* para saber que *pods* están listos para recibir tráfico, necesitamos de alguna forma para saber cuando se cumple dicha condición. Cuando un *pod* se cae, y la condición falla, el servicio de Kubernetes dejará de listarlo como posible objetivo en las conexiones entrantes, evitando un mal servicio al cliente que accede.
 
+En el [próximo tema](06-monitoreo.md) veremos como hacer monitoreo de los distintos componentes del cluster, ya que si bien tenemos opciones para que se recuperen automáticamente, pueden darse condiciones en las que tengamos que tomar una decisión de forma proactiva en base a métricas.
+
 ## Enlace sugeridos
 
 - [Namespaces](https://kubernetes.io/es/docs/concepts/overview/working-with-objects/namespaces/)

@@ -98,6 +98,8 @@ Una vez dentro de la GUI, podemos acceder al menú de `Dashboards (4 cuadrados) 
 
 Los dashboards se pueden hacer de forma manual, aunque toman demasiado tiempo y requieren un buen conocimiento de las métricas a analizar, como también de las funciones a utilizar para compactar esas métricas (avg, sum, rate, entre otros). Una de las mejores fuentes de dashboards es el [repositorio público de Grafana](https://grafana.com/grafana/dashboards/), aunque tengan en cuenta que en muchos casos son esfuerzos comunitarios y/o personales, por lo que es necesario hacer algunas correciones según como esté configurado nuestro cluster de Kubernetes (en cuanto a métricas) o los componentes que utilizamos y queremos monitorear.
 
+Si bien toda esta información es múy útil para entender el estado del cluster y sus componetes, a veces es necesario ir un paso más allá para resolver problemas, algo que cubriremos en el [próximo tema](07-troubleshooting.md).
+
 ## Enlaces sugeridos
 
 - [Tools for monitoring resources](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/)

@@ -450,6 +450,8 @@ Si en nuestro navegador visitamos <http://mi-app.com>, veremos nuestra aplicaci�
 
 > Dado que editamos nuestro archivo `/etc/hosts` y que k3d sólo escucha localmente por defecto, nadie más debería poder acceder a nuestra aplicación con esta configuración actual.
 
+¿Pasemos a algo más real? En el [próximo tema](04-hola-mundo-real.md) abordamos mejor el despliegue de nuestra aplicación.
+
 ## Enlaces sugeridos
 
 - [K3d](https://k3d.io)

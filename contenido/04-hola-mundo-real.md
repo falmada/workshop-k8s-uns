@@ -502,6 +502,8 @@ SF-->F3;
 SB-->B;
 ```
 
+Ya que pudimos armar un pequeño despliegue de nuestra aplicación, es hora de empezar a pensar en aplicar buenas prácticas al mismo, algo que cubriremos en el [próximo tema](05-buenas-practicas.md).
+
 ## Enlaces sugeridos
 
 - [What is self-healing in Kubernetes?](https://www.educative.io/answers/what-is-self-healing-in-kubernetes)
