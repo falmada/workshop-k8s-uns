@@ -97,3 +97,4 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 ## Otros recursos
 
 - [kube.academy](https://kube.academy/)
+- [kube.campus](https://kubecampus.io/)
