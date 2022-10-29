@@ -84,6 +84,9 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
   - OOMKill
   - Readiness
   - Terminating
+- kubectl explain
+- kubectl debug
+- Operadores y su complejidad
 
 ### [99 - Cheatsheet](contenido/99-cheatsheet.md)
 

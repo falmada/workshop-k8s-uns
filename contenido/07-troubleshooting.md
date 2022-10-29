@@ -129,7 +129,7 @@ Los contenedores nacen siendo livianos, o al menos eso se intenta como buena pr�
 
 Para poder hacer uso de `kubectl debug`, lo mejor es tener una imagen lista específicamente con nuestras herramientas más usadas, y luego hacer uso de la misma sólo en caso de emergencia. El contenedor que creemos con nuestra imagen, se adjuntará al *pod* que estamos intentando analizar, y luego de terminado nuestro trabajo, simplemente eliminaremos el *pod* de depuración.
 
-## Operadores y complejidad
+## Operadores y su complejidad
 
 Hemos intentado omitir a los operadores en este tema, pero vale la mención. Dado que los operadores implican una abstracción sobre los recursos desplegados de nuestras cargas de trabajo, el flujo usual de resolución de problemas pasa primero no por revisar los logs del *pod* afectado, sino más bien los logs del *pod* del operador, dado que este es el encargado de mantener todos los recursos hijos en buen estado, por ende tiene información de contexto mucho más útil que cada *pod* por separado.
 
