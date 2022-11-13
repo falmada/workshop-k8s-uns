@@ -194,7 +194,7 @@ Creamos el **replicaSet** y vemos cómo se comporta.
 ```bash
 ╰─ kubectl apply -f extras/04-hola-mundo-real/deploy-02/replicaSet-mi-app.yaml
 replicaset.apps/mi-app configured
-╰─ kubectl get pods                                                           
+╰─ kubectl get pods
 NAME           READY   STATUS    RESTARTS   AGE
 mi-app-jcg2b   1/1     Running   0          6s
 mi-app-ntsz7   1/1     Running   0          6s
@@ -262,7 +262,7 @@ mi-app-kfqsw   1/1     Running   0          16m
 mi-app-274ds   1/1     Running   0          15m
 ╰─ kubectl apply -f extras/04-hola-mundo-real/deploy-03/replicaSet-mi-app.yaml
 replicaset.apps/mi-app configured
-╰─ kubectl get pods                                                           
+╰─ kubectl get pods
 NAME           READY   STATUS    RESTARTS   AGE
 mi-app-57krf   1/1     Running   0          18m
 mi-app-kfqsw   1/1     Running   0          16m

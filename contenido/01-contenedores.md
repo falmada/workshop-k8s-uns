@@ -2,7 +2,7 @@
 
 ## Preparación
 
-Para poder ejecutar los pasos de este contenido, necesitamos tener docker-ce instalado. El ejemplo de abajo está pensado para Ubuntu pero pueden adecuar los pasos a su SO de elección:
+Para poder ejecutar los pasos de este workshop, necesitamos tener `docker-ce` instalado. El ejemplo de abajo está pensado para Ubuntu pero pueden adecuar los pasos a su SO de elección:
 
 ```sh
 # Actualizamos apt con los ultimos paquetes

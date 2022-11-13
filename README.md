@@ -14,7 +14,7 @@ Si de este taller surge al menos una persona interesada en usarlo para su trabaj
 
 ### Sobre Kubernetes
 
-Kubernetes es más que un orquestador de contenedores. Durante el workshop, esperamos mostrar tres de sus muchos beneficios:
+Kubernetes es más que un orquestador de contenedores. Durante el workshop, esperamos mostrar tres de sus [varias características](https://kubernetes.io/docs/concepts/overview/):
 
 - Portabilidad
 - Alta disponibilidad
@@ -22,7 +22,7 @@ Kubernetes es más que un orquestador de contenedores. Durante el workshop, espe
 
 ## Objetivo
 
-Durante el Workshop aprenderán lo necesario para llevar una aplicación casera desde su concepción hasta tenerla corriendo en Kubernetes siguiendo buensa prácticas.
+Durante el Workshop aprenderán lo necesario para llevar una aplicación casera desde su concepción hasta tenerla corriendo en Kubernetes siguiendo buenas prácticas.
 
 ## Contenido
 
@@ -98,3 +98,7 @@ Durante el Workshop aprenderán lo necesario para llevar una aplicación casera 
 
 - [kube.academy](https://kube.academy/)
 - [kube.campus](https://kubecampus.io/)
+
+## Comandos para el workshop en vivo
+
+En un archivo [dejamos todos los comandos](contenido/00-comandos.md) que se utilizarán durante el workshop para que puedan copiar y pegar acorde a como vayan avanzando en el material.

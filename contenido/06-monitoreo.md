@@ -86,7 +86,7 @@ Como mencionamos anteriormente, Prometheus recolecta métricas, y luego Grafana 
 Nuevamente, abramos un `port-forward`, esta vez apuntando al servicio de Grafana... aunque primero vamos a necesitar la clave para acceder.
 
 ```bash
-kubectl get secret kube-prometheus-grafan -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+kubectl get secret kube-prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 kubectl port-forward svc/kube-prometheus-grafana 3000:80
 ```
 

@@ -22,7 +22,7 @@ service/mi-deploy-svc created
 deployment.apps/mi-deploy created
 ingress.networking.k8s.io/mi-deploy-ingress created
 
-╰─ kubectl get all -n mi-app-kustomize                          
+╰─ kubectl get all -n mi-app-kustomize
 NAME                            READY   STATUS              RESTARTS   AGE
 pod/mi-deploy-f4cf76bd9-wffr9   0/1     ContainerCreating   0          5s
 pod/mi-deploy-f4cf76bd9-t5z89   1/1     Running             0          5s
