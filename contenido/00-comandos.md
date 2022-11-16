@@ -241,7 +241,7 @@ ping -c1 mi-app.com
 
 ## 04 - Self-healing
 
-```
+```bash
 # Visualizamos pods
 kubectl get pods
 # Eliminammos pod 
@@ -357,7 +357,7 @@ kubectl delete ingress mi-app-ingress
 
 ## 05 - Kustomization
 
-```
+```bash
 # ver codigo
 cat extras/05-buenas-practicas/ejemplo-kustomize/kustomization.yaml
 # instalar con kustomize
