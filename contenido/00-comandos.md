@@ -41,15 +41,11 @@ docker run --name docker_demo --rm -i -t alpine:latest sh
 # Parados en root de este repo
 docker build -t workshop-uns:latest extras/01-contenedores
 # Conectarnos a imagen
-╰─ docker run --name alpine_demo --rm -i -t my-image:latest sh
-/ # curl google.com
-<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
-<TITLE>301 Moved</TITLE></HEAD><BODY>
-<H1>301 Moved</H1>
-The document has moved
-<A HREF="http://www.google.com/">here</A>.
-</BODY></HTML>
-/ # 
+docker run --name alpine_demo --rm -i -t my-image:latest sh
+# Corremos un comando cualquiera
+curl google.com
+# Salimos
+exit
 ```
 
 ## 01 - Pusheando nuestra imagen
